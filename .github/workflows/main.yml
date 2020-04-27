@@ -22,6 +22,10 @@ jobs:
   build:
     name: Build and Test
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [12.x]
+    
     steps: 
 
             ## Since jobs do not pull down the source code by default,
@@ -41,10 +45,12 @@ jobs:
             run: npm ci
           - name: Build
             run: npm run build:ci
+          
           - name: run on linux
-              if: startsWith(matrix.os,'ubuntu')
-              run: |
+            if: startsWith(matrix.os,'ubuntu')
+            run: |
                 npm run test-headless
+
           - name: Test
             run: npm run test:ci
           - name: Archive build
