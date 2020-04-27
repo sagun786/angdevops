@@ -46,13 +46,11 @@ jobs:
           - name: Build
             run: npm run build:ci
           
-          - name: run on linux
+          - name: Test
             if: startsWith(matrix.os,'ubuntu')
             run: |
-                npm run test-headless
+                npm run test:ci
 
-          - name: Test
-            run: npm run test:ci
           - name: Archive build
             if: success()
             uses: actions/upload-artifact@v1
