@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:ci": "ng build --prod --sourceMap=false --base-href /sagun786/",
-    "test:ci": "ng test --watch=false --code-coverage --source-map true"
+    "test:ci": "ng test --watch=false --code-coverage --source-map true",
+    "test-headless": "ng test --watch=false --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
