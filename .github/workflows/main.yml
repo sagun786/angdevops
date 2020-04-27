@@ -47,9 +47,7 @@ jobs:
             run: npm run build:ci
           
           - name: Test
-            if: startsWith(matrix.os,'ubuntu')
-            run: |
-                npm run test:ci
+            run: npm run test:ci
 
           - name: Archive build
             if: success()
@@ -62,7 +60,7 @@ jobs:
             uses: actions/upload-artifact@v1
             with:
               name: deploy_coverage
-              path: coverage
+              path: output/
   
   deploy:
     runs-on: ubuntu-latest
