@@ -48,8 +48,9 @@ jobs:
           - name: Build
             run: npm run build:ci
           
-          - name: Test
-            run: npm run test:ci
+          - name: Install Firefox
+            run: npm install karma-firefox-launcher --save-dev   
+          
 
           - name: Archive build
             if: success()
