@@ -1,40 +1,15 @@
-##A project can have multiple workflow files like build, release, etc, 
-##but for the sake of simplicity, we’ll be using only one file for this project.
 
 
 ##GitHub is flexible with however you want to name your workflow file, 
 ## but the file has to be a yaml file and it has to be in the .github/workflows folder.
-name: main
+name: cd
 
-
-## A workflow trigger is required for a workflow. 
-## I configured the workflow to trigger on pushes to the master branch
 on:
   push:
     branches:
       - 'master'
 
-## In order to reduce build time and build complexity,
-## I will keep as much work inside one job as possible.
-## Job below is created to build and test the Angular application
-
 jobs:
-  ci:
-    name: Build and Test
-    runs-on: ubuntu-latest
-    ## Both setup node and the Dockerfile configuration should start from the same image container
-    env: 
-      CHROME_BIN: '/usr/bin/google-chrome'
-    container: 
-      image: node
-      
-    steps: 
-        - uses: actions/checkout@v1
-        - name: Install & Tests
-          run: |
-            npm install
-        ##npm test
-              
 ## Builds a Docker image and Pushes it to Docker Hub 
   cd:
     runs-on: ubuntu-latest
