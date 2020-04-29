@@ -35,4 +35,25 @@ jobs:
           run: |
             npm install
         ##npm test
+
+  ## Builds a Docker image and Pushes it to Docker Hub 
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - uses: actions/checkout@v1
+      
+
+      - name: Docker login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Docker Build
+        run: docker build -t front .
+      - name: Docker Image Tagging
+        run: |
+          docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          docker tag front ${{ secrets.DOCKER_USER }}/front:latest
+      - name: Docker Image Pushing
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/front:latest      
               
