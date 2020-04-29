@@ -46,7 +46,7 @@ jobs:
           - name: Install dependencies
             run: npm ci
           - name: Build
-            run: npm run build:ci
+            run: npm run build
           
           - name: Install Firefox
             run: npm install karma-firefox-launcher --save-dev   
@@ -70,7 +70,7 @@ jobs:
       - name: Docker login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
       - name: Docker Build
-        run: docker build:ci -t front .
+        run: docker build -t front .
       - name: Docker Image Tagging
         run: |
           docker tag front ${{ secrets.DOCKER_USER }}/front:${{ github.sha }}
