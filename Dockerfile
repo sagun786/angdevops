@@ -4,8 +4,6 @@ COPY . .
 RUN npm install
 RUN npm run build:prod
 
-ENV CHROME_BIN=chromium
-
 FROM nginx
 WORKDIR /var/www/front
 COPY --from=builder /opt/front/dist/ .
