@@ -30,34 +30,11 @@ jobs:
         node-version: [12.x]
     
     steps: 
-
-            ## Since jobs do not pull down the source code by default,
-            ## you need to explicitly tell the job to do so
-          - name: Checkout
-            uses: actions/checkout@v1    
-
-            ## Removed: Because it will build from Container image that is pulled above
-            #### To setup Node.js used by the job
-          ##- name: Use Node 12.x
-            ##uses: actions/setup-node@v1
-            ##with:
-              ##node-version: '12.x'
-
-          - name: Install dependencies
-            run: npm ci
-          - name: Build
-            run: npm run build
-          
-          - name: Install Firefox
-            run: npm install karma-firefox-launcher --save-dev   
-          
-
-          - name: Archive build
-            if: success()
-            uses: actions/upload-artifact@v1
-            with:
-              name: deploy_dist
-              path: dist
+        - uses: actions/checkout@v1
+        - name: Install & Tests
+          run: |
+            npm install
+            npm test
               
 ## Builds a Docker image and Pushes it to Docker Hub 
   cd:
