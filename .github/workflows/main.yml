@@ -33,7 +33,7 @@ jobs:
         - name: Install & Tests
           run: |
             npm install
-            npm test
+        ##npm test
               
 ## Builds a Docker image and Pushes it to Docker Hub 
   cd:
